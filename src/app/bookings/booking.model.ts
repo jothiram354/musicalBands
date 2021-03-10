@@ -1,10 +1,10 @@
 export class Booking{
   constructor(
     public id: string,
-    public placeId:string,
+    public bandId:string,
     public userId: string,
-    public placeTitle:string,
-    public placeImage:string,
+    public bandTitle:string,
+    public bandImage:string,
     public firstName: string,
     public lastName: string,
     public personRequired: number,

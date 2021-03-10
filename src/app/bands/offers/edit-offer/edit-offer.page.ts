@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Place } from '../../place.model';
-import { PlacesService } from '../../places.service';
+import { Band } from '../../band.model';
+import { BandsService } from '../../bands.service';
 
 @Component({
   selector: 'app-edit-offer',
@@ -13,15 +13,15 @@ import { PlacesService } from '../../places.service';
 })
 export class EditOfferPage implements OnInit,OnDestroy {
 
-  place: Place;
+  band: Band;
   form : FormGroup
-  private placeSub: Subscription
+  private bandSub: Subscription
   isLoading = false
-  placeId: string
+  bandId: string
 
   constructor(
     private route: ActivatedRoute,
-    private placesService: PlacesService,
+    private bandService: BandsService,
     private navCtrl: NavController,
     private router: Router,
     private loadingCtrl: LoadingController,
@@ -29,37 +29,37 @@ export class EditOfferPage implements OnInit,OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.placeSub = this.route.paramMap.subscribe( paramMap => {
-      if(!paramMap.has('placeId')){
-        this.navCtrl.navigateBack('/places/tabs/offers')
+    this.bandSub = this.route.paramMap.subscribe( paramMap => {
+      if(!paramMap.has('bandId')){
+        this.navCtrl.navigateBack('/bands/tabs/offers')
         return
       }
-      this.placeId =  paramMap.get('placeId')
+      this.bandId =  paramMap.get('bandId')
       this.isLoading = true
-      this.placeSub = this.placesService.getPlace(paramMap.get('placeId')).subscribe(place => {
-        this.place = place
+      this.bandSub = this.bandService.getBand(paramMap.get('bandId')).subscribe(band => {
+        this.band = band
         this.form = new FormGroup({
-          title: new FormControl(this.place.title,{
+          title: new FormControl(this.band.title,{
             updateOn:"blur",
             validators: [Validators.required]
           }),
-          description: new FormControl(this.place.description,{
+          description: new FormControl(this.band.description,{
             updateOn:"blur",
             validators: [Validators.required]
           }),
-          price: new FormControl(this.place.price,{
+          price: new FormControl(this.band.price,{
             updateOn: 'blur',
             validators:[Validators.required, Validators.min(1)]
           }),
-          dateFrom: new FormControl(this.place.availableFrom,{
+          dateFrom: new FormControl(this.band.availableFrom,{
             updateOn: 'blur',
             validators: [Validators.required]
           }),
-          dateTo: new FormControl(this.place.availableTo,{
+          dateTo: new FormControl(this.band.availableTo,{
             updateOn: 'blur',
             validators: [Validators.required  ]
           }),
-          imageUrl: new FormControl(this.place.imageUrl,{
+          imageUrl: new FormControl(this.band.imageUrl,{
             updateOn: 'blur',
             validators: [Validators.required  ]
           })
@@ -68,9 +68,9 @@ export class EditOfferPage implements OnInit,OnDestroy {
       }, error => {
         this.alertCtrl.create({
           header:'An error occured',
-          message:"place could not be fetched. PLease try again later",
+          message:"band could not be fetched. PLease try again later",
           buttons: [{text:'okay',handler: ()=>{
-            this.router.navigate(['/places/tabs/offers'])
+            this.router.navigate(['/bands/tabs/offers'])
           }}]
         }).then(alertEl => {
           alertEl.present()
@@ -89,8 +89,8 @@ export class EditOfferPage implements OnInit,OnDestroy {
       message:"updating bands..."
     }).then(loadingEl => {
       loadingEl.present()
-      this.placesService.updatePlace(
-        this.place.id,
+      this.bandService.updateBand(
+        this.band.id,
         this.form.value.title,
         this.form.value.description,
         this.form.value.imageUrl,
@@ -100,7 +100,7 @@ export class EditOfferPage implements OnInit,OnDestroy {
         ).subscribe(()=>{
           loadingEl.dismiss()
           this.form.reset()
-          this.router.navigate(['/places/tabs/offers'])
+          this.router.navigate(['/bands/tabs/offers'])
         })
     })
 
@@ -108,8 +108,8 @@ export class EditOfferPage implements OnInit,OnDestroy {
   }
 
   ngOnDestroy(){
-    if(this.placeSub){
-      this.placeSub.unsubscribe()
+    if(this.bandSub){
+      this.bandSub.unsubscribe()
     }
   }
 

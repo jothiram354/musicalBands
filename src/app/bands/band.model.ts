@@ -1,4 +1,4 @@
-export class Place {
+export class Band {
   constructor(
     public id: string,
     public title: string,

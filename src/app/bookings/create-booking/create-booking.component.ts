@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { Place } from 'src/app/places/place.model';
+import { Band } from 'src/app/bands/band.model';
 
 @Component({
   selector: 'app-create-booking',
@@ -11,7 +11,7 @@ import { Place } from 'src/app/places/place.model';
 })
 export class CreateBookingComponent implements OnInit {
 
-  @Input() selectedPlace: Place
+  @Input() selectedBand: Band
   @Input() selectedMode: 'select' | 'random'
   @ViewChild('f',{static:true}) form:NgForm
 
@@ -22,8 +22,8 @@ export class CreateBookingComponent implements OnInit {
 
   ngOnInit() {
 
-    const availableFrom = new Date(this.selectedPlace.availableFrom)
-    const availableTo = new Date(this.selectedPlace.availableTo)
+    const availableFrom = new Date(this.selectedBand.availableFrom)
+    const availableTo = new Date(this.selectedBand.availableTo)
     if(this.selectedMode === 'random'){
       this.startDate= new Date(
         availableFrom.getTime() +
@@ -45,7 +45,7 @@ export class CreateBookingComponent implements OnInit {
     this.modalCtrl.dismiss(null,'cancel');
   }
 
-  onBookPlace(){
+  onBookBand(){
     if(!this.form.valid || !this.datesValid){
         return
     }
@@ -58,7 +58,7 @@ export class CreateBookingComponent implements OnInit {
         endDate: new Date(this.form.value['date-to'])
       }
     },'confirm')
-    this.router.navigate(['/places/tabs/discover'])
+    this.router.navigate(['/bands/tabs/discover'])
   }
 
   datesValid(){

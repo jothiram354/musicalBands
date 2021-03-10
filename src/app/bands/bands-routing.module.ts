@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { PlacesPage } from './places.page';
+import { BandsPage } from './bands.page';
 
 const routes: Routes = [
   {
     path:'tabs',
-    component:PlacesPage,
+    component:BandsPage,
     children:[
       {
         path: 'discover',
         loadChildren: () => import('./discover/discover.module').then( m => m.DiscoverPageModule)
       },
       // {
-      //   path:':placeId',
-      //   loadChildren: () => import('./discover/place-detail/place-detail.module').then( m => m.PlaceDetailPageModule )
+      //   path:':bandId',
+      //   loadChildren: () => import('./discover/band-detail/band-detail.module').then( m => m.BandDetailPageModule )
       // },
       {
         path: 'offers',
@@ -34,4 +34,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PlacesPageRoutingModule {}
+export class BandsPageRoutingModule {}

@@ -12,9 +12,9 @@ interface BookingData{
   firstName: string,
   personRequired: number,
   lastName: string,
-  placeId: string,
-  placeImage: string,
-  placeTitle: string,
+  bandId: string,
+  bandImage: string,
+  bandTitle: string,
   userId:string
 }
 
@@ -33,9 +33,9 @@ export class BookingService{
   }
 
  addBooking(
-   placeId: string,
-   placeTitle:string,
-   placeImage:string,
+   bandId: string,
+   bandTitle:string,
+   bandImage:string,
    firstName:string,
    lastName:string,
    personRequired: number,
@@ -51,10 +51,10 @@ export class BookingService{
         }
         newBooking = new Booking(
           Math.random().toString(),
-          placeId,
+          bandId,
           userId,
-          placeTitle,
-          placeImage,
+          bandTitle,
+          bandImage,
           firstName,
           lastName,
           personRequired,
@@ -104,10 +104,10 @@ export class BookingService{
             if(bookingData.hasOwnProperty(key)){
               bookings.push(new Booking(
                 key,
-                bookingData[key].placeId,
+                bookingData[key].bandId,
                 bookingData[key].userId,
-                bookingData[key].placeTitle,
-                bookingData[key].placeImage,
+                bookingData[key].bandTitle,
+                bookingData[key].bandImage,
                 bookingData[key].firstName,
                 bookingData[key].lastName,
                 bookingData[key].personRequired,

@@ -21,15 +21,15 @@
           <ion-item-sliding *ngFor="let booking of loadedBookings" #slidingBooking>
             <ion-item>
               <ion-avatar slot="start">
-                <ion-img [src]="booking.placeImage"></ion-img>
+                <ion-img [src]="booking.bandImage"></ion-img>
               </ion-avatar>
               <ion-label>
-                <h5>{{booking.placeTitle}}</h5>
+                <h5>{{booking.bandTitle}}</h5>
                 <p>Person required:{{booking.personRequired}}</p>
               </ion-label>
               <!-- <ion-card>
                 <ion-card-header>
-                  {{booking.placeTitle}}
+                  {{booking.bandTitle}}
                 </ion-card-header>
                 <ion-card-subtitle>
                   Person required:{{booking.personRequired}}

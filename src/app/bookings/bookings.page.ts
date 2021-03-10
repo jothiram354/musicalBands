@@ -39,7 +39,7 @@ export class BookingsPage implements OnInit,OnDestroy {
       loadingEl.present()
       this.bookingService.cancelBooking(bookingId).subscribe(()=>{
         loadingEl.dismiss()
-        this.router.navigate(['/places/tabs/discover'])
+        this.router.navigate(['/bands/tabs/discover'])
       })
     })
 

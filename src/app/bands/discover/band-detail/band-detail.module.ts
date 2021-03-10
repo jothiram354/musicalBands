@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { PlaceDetailPageRoutingModule } from './place-detail-routing.module';
+import { BandDetailPageRoutingModule } from './band-detail-routing.module';
 
-import { PlaceDetailPage } from './place-detail.page';
+import { BandDetailPage } from './band-detail.page';
 import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-booking.component';
 
 @NgModule({
@@ -14,8 +14,8 @@ import { CreateBookingComponent } from 'src/app/bookings/create-booking/create-b
     CommonModule,
     FormsModule,
     IonicModule,
-    PlaceDetailPageRoutingModule
+    BandDetailPageRoutingModule
   ],
-  declarations: [PlaceDetailPage, CreateBookingComponent],
+  declarations: [BandDetailPage, CreateBookingComponent],
 })
-export class PlaceDetailPageModule {}
+export class BandDetailPageModule {}

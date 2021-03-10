@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { PlacesService } from '../../places.service';
+import { BandsService } from '../../bands.service';
 
 @Component({
   selector: 'app-new-offer',
@@ -13,7 +13,7 @@ export class NewOfferPage implements OnInit {
 
   form: FormGroup;
 
-  constructor(private placeService:PlacesService,private router:Router, private loadingCtrl: LoadingController) { }
+  constructor(private bandService:BandsService,private router:Router, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -49,10 +49,10 @@ export class NewOfferPage implements OnInit {
       return;
     }
     this.loadingCtrl.create({
-      message:"Creating Place",
+      message:"Creating Band",
     }).then(loadingEl => {
       loadingEl.present()
-      this.placeService.addPlace(
+      this.bandService.addBand(
         this.form.value.title,
         this.form.value.description,
         +this.form.value.price,
@@ -62,7 +62,7 @@ export class NewOfferPage implements OnInit {
       ).subscribe(()=>{
         this.loadingCtrl.dismiss()
         this.form.reset()
-        this.router.navigate(['/places/tabs/offers'])
+        this.router.navigate(['/bands/tabs/offers'])
 
       })
     })

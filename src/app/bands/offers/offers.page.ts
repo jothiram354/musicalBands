@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonItemSliding } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Place } from '../place.model';
-import { PlacesService } from '../places.service';
+import { Band } from '../band.model';
+import { BandsService } from '../bands.service';
 
 @Component({
   selector: 'app-offers',
@@ -12,13 +12,13 @@ import { PlacesService } from '../places.service';
 })
 export class OffersPage implements OnInit,OnDestroy {
 
-  offers: Place[];
-  private placesSub: Subscription
+  offers: Band[];
+  private bandsSub: Subscription
   isLoading = false
 
-  constructor(private placesService: PlacesService, private router: Router) {
-    this.placesSub = this.placesService.places.subscribe( places => {
-      this.offers= places
+  constructor(private bandsService: BandsService, private router: Router) {
+    this.bandsSub = this.bandsService.bands.subscribe( bands => {
+      this.offers= bands
     })
   }
 
@@ -27,19 +27,19 @@ export class OffersPage implements OnInit,OnDestroy {
 
   ionViewWillEnter(){
     this.isLoading=true
-    this.placesService.fetchPlaces().subscribe(()=>{
+    this.bandsService.fetchBands().subscribe(()=>{
       this.isLoading = false
     })
   }
 
   onEdit(offerId: string, slidingItem: IonItemSliding){
     slidingItem.close()
-    this.router.navigate(['/','places','tabs','offers','edit',offerId])
+    this.router.navigate(['/','bands','tabs','offers','edit',offerId])
   }
 
   ngOnDestroy(){
-    if(this.placesSub){
-      this.placesSub.unsubscribe()
+    if(this.bandsSub){
+      this.bandsSub.unsubscribe()
     }
   }
 
